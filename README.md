@@ -5,6 +5,18 @@ sunaku's [Glorious Engrammer][ge] keymap (v52) ported to a **wireless 42-key Cor
 
 [ge]: https://github.com/sunaku/glove80-keymaps
 
+## Layout
+
+![Base layer](img/keymap-base.svg)
+
+All 21 layers are in **[`img/keymap.svg`](img/keymap.svg)**. Regenerate after any
+keymap change with [keymap-drawer](https://github.com/caksoylar/keymap-drawer):
+
+```sh
+keymap parse -z config/corne.keymap -o keymap.yaml
+keymap draw keymap.yaml -o img/keymap.svg
+```
+
 ## What this is
 
 The Glove80 keymap, minus what a Corne physically cannot hold. sunaku's QWERTY
@@ -14,8 +26,8 @@ what a Corne has — so all six thumb layers port 1:1:
 | Thumb | Left | Right |
 | --- | --- | --- |
 | outer | `Esc` → Function | `Enter` → System |
-| middle | `Del` → Number | `Tab` → Mouse |
-| inner | `Bspc` → Cursor | `Space` → Symbol |
+| middle | `Bspc` → Cursor | `Space` → Symbol |
+| inner | `Del` → Number | `Tab` → Mouse |
 
 Magic is held from the outer pinky key below `=`.
 

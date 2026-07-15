@@ -844,9 +844,9 @@
          * Thumbs -- sunaku's QWERTY build uses exactly T1/T4/T5 per hand, which is
          * exactly what a Corne has. Assigned by frequency onto Corne ergonomics:
          *
-         *   36 = L outer  Esc   -> Function     39 = R inner  Space -> Symbol
-         *   37 = L mid    Del   -> Number       40 = R mid    Tab   -> Mouse
-         *   38 = L inner  Bspc  -> Cursor       41 = R outer  Enter -> System
+         *   36 = L outer  Esc   -> Function     39 = R inner  Tab   -> Mouse
+         *   37 = L mid    Bspc  -> Cursor       40 = R mid    Space -> Symbol
+         *   38 = L inner  Del   -> Number       41 = R outer  Enter -> System
          */
 
         layer_QWERTY {
@@ -855,7 +855,7 @@
    &none                 &kp Q        &kp W        &kp E        &kp R  &kp T        &kp Y        &kp U        &kp I       &kp O           &kp P                       &kp MINUS
    &kp EQUAL       &lP LCTRL A  &lR LALT S   &lM LGUI D   &lI LSHFT F  &kp G        &kp H  &rI RSHFT J  &rM RGUI K  &rR LALT L  &rP RCTRL SEMI                         &kp SQT
    &magic LAYER_Magic 0  &kp Z        &kp X        &kp C        &kp V  &kp B        &kp N        &kp M    &kp COMMA     &kp DOT        &kp FSLH  &sticky_key_modtap RSFT RSFT
-                          &thumb LAYER_Function ESC  &thumb LAYER_Number DEL  &thumb LAYER_Cursor BSPC        &space LAYER_Symbol SPACE  &thumb LAYER_Mouse TAB  &thumb LAYER_System ENTER
+                          &thumb LAYER_Function ESC  &thumb LAYER_Cursor BSPC  &thumb LAYER_Number DEL        &thumb LAYER_Mouse TAB  &space LAYER_Symbol SPACE  &thumb LAYER_System ENTER
             >;
         };
 
