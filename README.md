@@ -25,9 +25,9 @@ what a Corne has — so all six thumb layers port 1:1:
 
 | Thumb | Left | Right |
 | --- | --- | --- |
-| outer | `Esc` → Function | `Enter` → System |
-| middle | `Bspc` → Cursor | `Space` → Symbol |
-| inner | `Del` → Number | `Tab` → Mouse |
+| outer | `Bspc` → Cursor | `Space` → Symbol |
+| middle | `Del` → Number | `Tab` → Mouse |
+| inner | `Esc` → Function | `Enter` → System |
 
 Magic is held from the outer pinky key below `=`.
 
