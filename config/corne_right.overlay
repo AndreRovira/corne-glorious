@@ -1,0 +1,24 @@
+/* Right half -- identical to corne_left.overlay; see there for the no-RGB rationale. */
+
+/ {
+    chosen {
+        zmk,battery = &vbatt;
+    };
+
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+    };
+};
+
+/* No RGB on this board.
+ *
+ * The upstream Corne overlay enables &spi3 and declares a ws2812 led_strip on it.
+ * Leaving that in place makes Zephyr initialize the SPIM3 peripheral at boot even
+ * with CONFIG_ZMK_RGB_UNDERGLOW=n -- and SPIM3 on the nRF52840 draws extra current
+ * whenever it is enabled (Nordic anomaly 195). With no LEDs to drive, the whole
+ * block is omitted: no &pinctrl spi3 groups, no &spi3 node, no zmk,underglow
+ * chosen node, and no EXT_POWER node (nothing is on the switched VCC rail).
+ *
+ * If LEDs are ever installed, restore this file from git history and re-add the
+ * RGB module per build.yaml.
+ */

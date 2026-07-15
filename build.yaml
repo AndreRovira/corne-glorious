@@ -1,0 +1,11 @@
+# No RGB: this Corne has no LEDs installed. Enabling ZMK's underglow with no
+# strip attached still powers the SPI peripheral and the WS2812 driver, so it
+# is disabled at the Kconfig level and the RGB module is left out of the build.
+#
+# To re-enable if LEDs are ever added, restore corne_rgb_module from optional/
+# and add: cmake-args: -DZMK_EXTRA_MODULES=${GITHUB_WORKSPACE}/optional/corne_rgb_module
+include:
+  - board: nice_nano/nrf52840/zmk
+    shield: corne_left
+  - board: nice_nano/nrf52840/zmk
+    shield: corne_right
