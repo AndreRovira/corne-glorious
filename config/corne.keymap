@@ -13,36 +13,7 @@
 
 /* ── Helper macros ── */
 
-#pragma once
-
-#define ZMK_BEHAVIOR_CORE_tap_dance  \
-    compatible = "zmk,behavior-tap-dance"; \
-    #binding-cells = <0>
-
-#define ZMK_BEHAVIOR(name, type, ...) \
-    name: name { \
-        ZMK_BEHAVIOR_CORE_ ## type; \
-        __VA_ARGS__ \
-    };
-
-#define ZMK_TAP_DANCE(name, ...) \
-    ZMK_BEHAVIOR(name, tap_dance, __VA_ARGS__)
-
-#define ZMK_TD_LAYER(name, layer) \
-    ZMK_TAP_DANCE(name, \
-        tapping-term-ms = <200>; \
-        bindings = <&mo layer>, <&to layer>; \
-)
-
-/* sunaku's keymap uses ZMK_MACRO(), which MoErgo's Layout Editor preprocesses.
- * Mainline ZMK has no such helper, so define it here with the same signature.
- */
-#define ZMK_MACRO(name, ...) \
-    name: name { \
-        compatible = "zmk,behavior-macro"; \
-        #binding-cells = <0>; \
-        __VA_ARGS__ \
-    };
+/* ZMK_MACRO() comes from <behaviors.dtsi> (app/dts/behaviors/macros.dtsi). */
 
 /* ── sunaku timing constants (keymap.zmk:1724, 3954, 3962, 4091) ── */
 
@@ -133,19 +104,22 @@
 
 /* ── Bilateral HRM trigger positions ── */
 
+/* Opposite-hand keys only -- this is what makes bilateral bilateral. Upstream
+ * uses <RIGHT_HAND_KEYS> for left HRMs, which contains the RIGHT thumbs only
+ * (keymap.zmk:2052-2062). Listing a hand's own thumbs here would let a same-hand
+ * thumb trigger the hold, i.e. Ctrl+Esc.
+ */
 #define LEFT_HRM_TRIGGERS \
     6 7 8 9 10 11 \
     18 19 20 21 22 23 \
     30 31 32 33 34 35 \
-    39 40 41 \
-    36 37 38
+    39 40 41
 
 #define RIGHT_HRM_TRIGGERS \
     0 1 2 3 4 5 \
     12 13 14 15 16 17 \
     24 25 26 27 28 29 \
-    36 37 38 \
-    39 40 41
+    36 37 38
 
 /* ── System behaviors ── */
 
@@ -178,11 +152,6 @@
     layer_MouseWarp {
         layers = <LAYER_MouseWarp>;
         input-processors = <&zip_scroll_scaler 12 1>;
-    };
-};
-
-/ {
-    behaviors {
     };
 };
 
@@ -276,83 +245,13 @@
               ;
         };
 
-        spanish_acute: spanish_acute {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <1>;
-            wait-ms = <1>;
-            bindings = <&kp CAPS>, <&kp SQT>;
-        };
 
-        AS_Shifted: AS_Shifted {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings = <&macro_press>
-                , <&kp LSHFT>
-                , <&macro_tap>
-                , <&macro_param_1to1>
-                , <&kp MACRO_PLACEHOLDER>
-                , <&macro_release>
-                , <&kp LSHFT>;
-        };
 
-        AS_macro: AS_macro {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings = <&macro_press>
-                , <&macro_param_1to1>
-                , <&macro_param_1to2>
-                , <&AS_HT MACRO_PLACEHOLDER MACRO_PLACEHOLDER>
-                , <&macro_pause_for_release>
-                , <&macro_release>
-                , <&macro_param_1to1>
-                , <&macro_param_1to2>
-                , <&AS_HT MACRO_PLACEHOLDER MACRO_PLACEHOLDER>;
-        };
 
-        cur_EXTEND_LINE: cur_EXTEND_LINE {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <1>;
-            wait-ms = <1>;
-            bindings = <&kp LG(LS(RIGHT))>;
-        };
 
-        cur_EXTEND_WORD: cur_EXTEND_WORD {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <1>;
-            wait-ms = <1>;
-            bindings = <&kp LA(LS(RIGHT))>;
-        };
 
-        cur_SELECT_LINE: cur_SELECT_LINE {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <1>;
-            wait-ms = <1>;
-            bindings = <&kp LG(LEFT)>, <&kp LG(LS(RIGHT))>;
-        };
 
-        cur_SELECT_NONE: cur_SELECT_NONE {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <1>;
-            wait-ms = <1>;
-            bindings = <&kp DOWN>, <&kp UP>, <&kp RIGHT>, <&kp LEFT>;
-        };
 
-        cur_SELECT_WORD: cur_SELECT_WORD {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <1>;
-            wait-ms = <1>;
-            bindings = <&kp LA(LEFT)>, <&kp LA(LS(RIGHT))>;
-        };
 
         /* Bilateral HRM hold macros — press modifier + activate layer */
 
@@ -547,32 +446,7 @@
         bt_3: bt_3 { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&out OUT_BLE>, <&bt BT_SEL 3>; };
 
-        mod_tab: mod_tab {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>; wait-ms = <0>;
-            bindings = <&macro_press>
-                , <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>
-                , <&macro_tap>, <&kp TAB>
-                , <&macro_pause_for_release>
-                , <&macro_release>
-                , <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
-        };
 
-        mod_tab_chord: mod_tab_chord {
-            compatible = "zmk,behavior-macro-two-param";
-            #binding-cells = <2>;
-            tap-ms = <0>; wait-ms = <0>;
-            bindings = <&macro_press>
-                , <&macro_param_2to1>, <&mo MACRO_PLACEHOLDER>
-                , <&macro_press>
-                , <&macro_param_1to1>, <&mod_tab MACRO_PLACEHOLDER>
-                , <&macro_pause_for_release>
-                , <&macro_release>
-                , <&macro_param_1to1>, <&mod_tab MACRO_PLACEHOLDER>
-                , <&macro_release>
-                , <&macro_param_2to1>, <&mo MACRO_PLACEHOLDER>;
-        };
     };
 };
 
@@ -651,13 +525,6 @@
             ignore-modifiers;
         };
 
-        AS_HT: AS_HT {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <190>;
-            bindings = <&AS_Shifted>, <&kp>;
-            flavor = "tap-preferred";
-        };
 
         space: space {
             compatible = "zmk,behavior-hold-tap";
@@ -677,23 +544,7 @@
             quick-tap-ms = <300>;
         };
 
-        enter_sym: enter_sym {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
-            flavor = "balanced";
-            quick-tap-ms = <300>;
-        };
 
-        caps_shift: caps_shift {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            bindings = <&kp>, <&kp>;
-            flavor = "balanced";
-            quick-tap-ms = <200>;
-        };
 
         /* ── Left hand main HRM hold-taps ── */
 
@@ -966,11 +817,11 @@
 
         combo_lower_left { timeout-ms = <50>; key-positions = <25 26>;
             bindings = <&mo LAYER_Lower>;
-            layers = <LAYER_QWERTY>; };
+            layers = <LAYER_QWERTY LAYER_Typing>; };
 
         combo_lower_right { timeout-ms = <50>; key-positions = <33 34>;
             bindings = <&mo LAYER_Lower>;
-            layers = <LAYER_QWERTY>; };
+            layers = <LAYER_QWERTY LAYER_Typing>; };
     };
 };
 
@@ -1031,9 +882,9 @@
             display-name = "LP";
             bindings = <
    &trans  &lP_tap Q      &lP_tap W     &lP_tap E      &lP_tap R  &lP_tap T  &trans  &trans  &trans  &trans    &trans  &trans
-   &trans      &none  &lP_r LALT S  &lP_m LGUI D  &lP_i LSHFT F  &lP_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
+   &lP_tap EQUAL      &none  &lP_r LALT S  &lP_m LGUI D  &lP_i LSHFT F  &lP_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans  &lP_tap Z      &lP_tap X     &lP_tap C      &lP_tap V  &lP_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                                    &trans  &trans  &trans        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
             >;
         };
 
@@ -1041,9 +892,9 @@
             display-name = "LR";
             bindings = <
    &trans      &lR_tap Q  &lR_tap W     &lR_tap E      &lR_tap R  &lR_tap T  &trans  &trans  &trans  &trans    &trans  &trans
-   &trans  &lR_p LCTRL A      &none  &lR_m LGUI D  &lR_i LSHFT F  &lR_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
+   &lR_tap EQUAL  &lR_p LCTRL A      &none  &lR_m LGUI D  &lR_i LSHFT F  &lR_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans      &lR_tap Z  &lR_tap X     &lR_tap C      &lR_tap V  &lR_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                                    &trans  &trans  &trans        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
             >;
         };
 
@@ -1051,9 +902,9 @@
             display-name = "LM";
             bindings = <
    &trans      &lM_tap Q     &lM_tap W  &lM_tap E      &lM_tap R  &lM_tap T  &trans  &trans  &trans  &trans    &trans  &trans
-   &trans  &lM_p LCTRL A  &lM_r LALT S      &none  &lM_i LSHFT F  &lM_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
+   &lM_tap EQUAL  &lM_p LCTRL A  &lM_r LALT S      &none  &lM_i LSHFT F  &lM_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans      &lM_tap Z     &lM_tap X  &lM_tap C      &lM_tap V  &lM_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                                    &trans  &trans  &trans        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
             >;
         };
 
@@ -1061,9 +912,9 @@
             display-name = "LI";
             bindings = <
    &trans      &lI_tap Q     &lI_tap W     &lI_tap E  &lI_tap R  &lI_tap T  &trans  &trans  &trans  &trans    &trans  &trans
-   &trans  &lI_p LCTRL A  &lI_r LALT S  &lI_m LGUI D      &none  &lI_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
+   &lI_tap EQUAL  &lI_p LCTRL A  &lI_r LALT S  &lI_m LGUI D      &none  &lI_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans      &lI_tap Z     &lI_tap X     &lI_tap C  &lI_tap V  &lI_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                                    &trans  &trans  &trans        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
             >;
         };
 
@@ -1073,7 +924,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rP_tap Y      &rP_tap U     &rP_tap I      &rP_tap O          &rP_tap P  &rP_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rP_tap H  &rP_i RSHFT J  &rP_m RGUI K  &rP_r LALT L              &none    &rP_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rP_tap N      &rP_tap M  &rP_tap COMMA    &rP_tap DOT      &rP_tap FSLH         &trans
-                       &trans  &trans  &trans          &trans  &trans  &trans
+                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
             >;
         };
 
@@ -1083,7 +934,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rR_tap Y      &rR_tap U     &rR_tap I         &rR_tap O          &rR_tap P  &rR_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rR_tap H  &rR_i RSHFT J  &rR_m RGUI K             &none  &rR_p RCTRL SEMI    &rR_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rR_tap N      &rR_tap M  &rR_tap COMMA       &rR_tap DOT      &rR_tap FSLH         &trans
-                       &trans  &trans  &trans          &trans  &trans  &trans
+                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
             >;
         };
 
@@ -1093,7 +944,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rM_tap Y      &rM_tap U        &rM_tap I     &rM_tap O          &rM_tap P  &rM_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rM_tap H  &rM_i RSHFT J            &none  &rM_r LALT L  &rM_p RCTRL SEMI    &rM_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rM_tap N      &rM_tap M    &rM_tap COMMA   &rM_tap DOT      &rM_tap FSLH         &trans
-                       &trans  &trans  &trans          &trans  &trans  &trans
+                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
             >;
         };
 
@@ -1103,7 +954,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rI_tap Y      &rI_tap U     &rI_tap I     &rI_tap O          &rI_tap P  &rI_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rI_tap H          &none  &rI_m RGUI K  &rI_r LALT L  &rI_p RCTRL SEMI    &rI_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rI_tap N      &rI_tap M  &rI_tap COMMA   &rI_tap DOT      &rI_tap FSLH         &trans
-                       &trans  &trans  &trans          &trans  &trans  &trans
+                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
             >;
         };
 
@@ -1140,7 +991,7 @@
         layer_Function {
             display-name = "FUNC";
             bindings = <
-       &none    &kp C_PREV      &kp C_PP    &kp C_MUTE   &kp BSPC  &kp K_CALC     &kp K_CALC  &kp F7  &kp F8  &kp F9  &kp F10  &kp F13
+       &none       &kp RET    &kp C_PREV      &kp C_PP  &kp C_MUTE  &kp K_CALC     &kp K_CALC  &kp F7  &kp F8  &kp F9  &kp F10  &kp F13
    &sk LSHFT     &kp LCTRL      &kp LALT      &kp LGUI  &kp LSHFT   &kp K_WWW      &kp K_WWW  &kp F4  &kp F5  &kp F6  &kp F11  &kp F14
        &none   &select_all  &select_line  &select_word  &kp _FIND  &kp _FILES     &kp _FILES  &kp F1  &kp F2  &kp F3  &kp F12  &kp F15
                         &tog LAYER_Function  &none  &none          &kp C_VOL_UP  &kp C_VOL_DN  &kp C_NEXT
@@ -1169,9 +1020,9 @@
         layer_Mouse {
             display-name = "MOUS";
             bindings = <
-   &none                   &none  &msc MOUSE_SCROLL_LEFT       &mmv MOVE_UP  &msc MOUSE_SCROLL_RIGHT                   &none     &msc MOUSE_SCROLL_LEFT            &mkp LCLK            &mkp MCLK            &mkp RCLK  &msc MOUSE_SCROLL_RIGHT     &none
-   &none    &msc MOUSE_SCROLL_UP          &mmv MOVE_LEFT     &mmv MOVE_DOWN          &mmv MOVE_RIGHT    &msc MOUSE_SCROLL_UP       &msc MOUSE_SCROLL_UP  &mo LAYER_MouseFast  &mo LAYER_MouseWarp  &mo LAYER_MouseSlow                &kp K_APP  &mkp MB4
-   &none  &msc MOUSE_SCROLL_DOWN     &mo LAYER_MouseSlow  &mo LAYER_MouseWarp      &mo LAYER_MouseFast  &msc MOUSE_SCROLL_DOWN   &msc MOUSE_SCROLL_DOWN       &mmv MOVE_LEFT         &mmv MOVE_UP       &mmv MOVE_DOWN          &mmv MOVE_RIGHT  &mkp MB5
+   &none                   &none  &msc SCRL_LEFT       &mmv MOVE_UP  &msc SCRL_RIGHT                   &none     &msc SCRL_LEFT            &mkp LCLK            &mkp MCLK            &mkp RCLK  &msc SCRL_RIGHT     &none
+   &none    &msc SCRL_UP          &mmv MOVE_LEFT     &mmv MOVE_DOWN          &mmv MOVE_RIGHT    &msc SCRL_UP       &msc SCRL_UP  &mo LAYER_MouseFast  &mo LAYER_MouseWarp  &mo LAYER_MouseSlow                &kp K_APP  &mkp MB4
+   &none  &msc SCRL_DOWN     &mo LAYER_MouseSlow  &mo LAYER_MouseWarp      &mo LAYER_MouseFast  &msc SCRL_DOWN   &msc SCRL_DOWN       &mmv MOVE_LEFT         &mmv MOVE_UP       &mmv MOVE_DOWN          &mmv MOVE_RIGHT  &mkp MB5
                                   &mkp MCLK  &mkp RCLK  &mkp LCLK               &none  &tog LAYER_Mouse  &kp _PASTE
             >;
         };
@@ -1242,7 +1093,7 @@
         layer_Magic {
             display-name = "MAGIC";
             bindings = <
-     &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &none     &none  &none  &none  &none  &none      &bt BT_CLR_ALL
+     &bt BT_CLR        &bt_0         &bt_1         &bt_2         &bt_3  &none     &none  &none  &none  &none  &none      &bt BT_CLR_ALL
     &bootloader         &none         &none         &none         &none  &none     &none  &none  &none  &none  &none         &bootloader
      &sys_reset         &none         &none         &none  &tog LAYER_Typing  &none  &none  &none  &none  &none  &none        &sys_reset
                           &out OUT_USB  &out OUT_BLE  &none                &none  &none  &none

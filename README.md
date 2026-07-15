@@ -47,10 +47,12 @@ per hand and all three are already used. The other 16 needed `T2`/`T3`/`T6`.
 
 ## No RGB
 
-This board has no LEDs. Beyond `CONFIG_ZMK_RGB_UNDERGLOW=n`, the overlays drop
-the `&spi3` node and its `ws2812` strip entirely: leaving them would make Zephyr
-initialize SPIM3 at boot regardless of Kconfig, and SPIM3 on the nRF52840 draws
-extra current whenever enabled (Nordic anomaly 195).
+This board has no LEDs. `CONFIG_ZMK_RGB_UNDERGLOW=n` is what actually matters:
+nothing then selects `LED_STRIP`, so `CONFIG_SPI` stays off and SPIM3 is never
+initialized. The overlays additionally set `&spi3 { status = "disabled"; }` as
+belt-and-braces, because ZMK's own Corne shield tree declares the bus and a
+`ws2812` strip on it — that file is always applied, so it cannot be removed from
+here, only overridden.
 
 If LEDs are ever installed, restore `optional/corne_rgb_module` per `build.yaml`
 and revert the overlays from git history.
