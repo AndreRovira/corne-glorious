@@ -980,7 +980,7 @@
        &none        &kp A         &kp B         &kp C         &kp D      &kp N0      &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)     &kp LS(N5)
    &sk LSHFT    &kp LCTRL      &kp LALT      &kp LGUI     &kp LSHFT       &kp X          &kp K  &kp N4  &kp N5  &kp N6     &kp MINUS  &kp LS(EQUAL)
        &kp E  &select_all  &select_line  &select_word     &kp _FIND       &kp F          &kp J  &kp N1  &kp N2  &kp N3      &kp FSLH     &kp LS(N8)
-                              &none  &tog LAYER_Number  &none            &kp N0  &kp DOT  &kp COMMA
+                              &none  &tog LAYER_Number  &none            &kp EQUAL  &kp DOT  &kp N0
             >;
         };
 
