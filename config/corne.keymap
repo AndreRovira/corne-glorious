@@ -852,10 +852,10 @@
         layer_QWERTY {
             display-name = "BASE";
             bindings = <
-   &none                 &kp Q        &kp W        &kp E        &kp R  &kp T        &kp Y        &kp U        &kp I       &kp O           &kp P                       &kp MINUS
+   &kp F12               &kp Q        &kp W        &kp E        &kp R  &kp T        &kp Y        &kp U        &kp I       &kp O           &kp P                       &kp MINUS
    &kp EQUAL       &lP LCTRL A  &lR LALT S   &lM LGUI D   &lI LSHFT F  &kp G        &kp H  &rI RSHFT J  &rM RGUI K  &rR LALT L  &rP RCTRL SEMI                         &kp SQT
    &magic LAYER_Magic 0  &kp Z        &kp X        &kp C        &kp V  &kp B        &kp N        &kp M    &kp COMMA     &kp DOT        &kp FSLH  &sticky_key_modtap RSFT RSFT
-                          &thumb LAYER_Cursor BSPC  &thumb LAYER_Number DEL  &thumb LAYER_Function ESC        &thumb LAYER_System ENTER  &thumb LAYER_Mouse TAB  &space LAYER_Symbol SPACE
+                          &thumb LAYER_Function ESC  &thumb LAYER_Cursor BSPC  &thumb LAYER_Number DEL        &thumb LAYER_Mouse TAB  &space LAYER_Symbol SPACE  &thumb LAYER_System ENTER
             >;
         };
 
@@ -866,7 +866,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans     &trans  &trans
    &trans   &kp A   &kp S   &kp D   &kp F  &trans     &trans   &kp J   &kp K   &kp L   &kp SEMI  &trans
    &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans     &trans  &trans
-                     &kp ESC  &kp DEL  &kp BSPC        &kp SPACE  &kp TAB  &kp ENTER
+                     &kp ESC  &kp BSPC  &kp DEL        &kp TAB  &kp SPACE  &kp ENTER
             >;
         };
 
@@ -884,7 +884,7 @@
    &trans  &lP_tap Q      &lP_tap W     &lP_tap E      &lP_tap R  &lP_tap T  &trans  &trans  &trans  &trans    &trans  &trans
    &lP_tap EQUAL      &none  &lP_r LALT S  &lP_m LGUI D  &lP_i LSHFT F  &lP_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans  &lP_tap Z      &lP_tap X     &lP_tap C      &lP_tap V  &lP_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Cursor  &mo LAYER_Number        &trans  &trans  &trans
             >;
         };
 
@@ -894,7 +894,7 @@
    &trans      &lR_tap Q  &lR_tap W     &lR_tap E      &lR_tap R  &lR_tap T  &trans  &trans  &trans  &trans    &trans  &trans
    &lR_tap EQUAL  &lR_p LCTRL A      &none  &lR_m LGUI D  &lR_i LSHFT F  &lR_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans      &lR_tap Z  &lR_tap X     &lR_tap C      &lR_tap V  &lR_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Cursor  &mo LAYER_Number        &trans  &trans  &trans
             >;
         };
 
@@ -904,7 +904,7 @@
    &trans      &lM_tap Q     &lM_tap W  &lM_tap E      &lM_tap R  &lM_tap T  &trans  &trans  &trans  &trans    &trans  &trans
    &lM_tap EQUAL  &lM_p LCTRL A  &lM_r LALT S      &none  &lM_i LSHFT F  &lM_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans      &lM_tap Z     &lM_tap X  &lM_tap C      &lM_tap V  &lM_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Cursor  &mo LAYER_Number        &trans  &trans  &trans
             >;
         };
 
@@ -914,7 +914,7 @@
    &trans      &lI_tap Q     &lI_tap W     &lI_tap E  &lI_tap R  &lI_tap T  &trans  &trans  &trans  &trans    &trans  &trans
    &lI_tap EQUAL  &lI_p LCTRL A  &lI_r LALT S  &lI_m LGUI D      &none  &lI_tap G  &trans   &kp J   &kp K   &kp L  &kp SEMI  &trans
    &trans      &lI_tap Z     &lI_tap X     &lI_tap C  &lI_tap V  &lI_tap B  &trans  &trans  &trans  &trans    &trans  &trans
-                    &mo LAYER_Function  &mo LAYER_Number  &mo LAYER_Cursor        &trans  &trans  &trans
+                    &mo LAYER_Function  &mo LAYER_Cursor  &mo LAYER_Number        &trans  &trans  &trans
             >;
         };
 
@@ -924,7 +924,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rP_tap Y      &rP_tap U     &rP_tap I      &rP_tap O          &rP_tap P  &rP_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rP_tap H  &rP_i RSHFT J  &rP_m RGUI K  &rP_r LALT L              &none    &rP_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rP_tap N      &rP_tap M  &rP_tap COMMA    &rP_tap DOT      &rP_tap FSLH         &trans
-                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
+                    &trans  &trans  &trans        &mo LAYER_Mouse  &mo LAYER_Symbol  &mo LAYER_System
             >;
         };
 
@@ -934,7 +934,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rR_tap Y      &rR_tap U     &rR_tap I         &rR_tap O          &rR_tap P  &rR_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rR_tap H  &rR_i RSHFT J  &rR_m RGUI K             &none  &rR_p RCTRL SEMI    &rR_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rR_tap N      &rR_tap M  &rR_tap COMMA       &rR_tap DOT      &rR_tap FSLH         &trans
-                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
+                    &trans  &trans  &trans        &mo LAYER_Mouse  &mo LAYER_Symbol  &mo LAYER_System
             >;
         };
 
@@ -944,7 +944,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rM_tap Y      &rM_tap U        &rM_tap I     &rM_tap O          &rM_tap P  &rM_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rM_tap H  &rM_i RSHFT J            &none  &rM_r LALT L  &rM_p RCTRL SEMI    &rM_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rM_tap N      &rM_tap M    &rM_tap COMMA   &rM_tap DOT      &rM_tap FSLH         &trans
-                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
+                    &trans  &trans  &trans        &mo LAYER_Mouse  &mo LAYER_Symbol  &mo LAYER_System
             >;
         };
 
@@ -954,7 +954,7 @@
    &trans  &trans  &trans  &trans  &trans  &trans      &rI_tap Y      &rI_tap U     &rI_tap I     &rI_tap O          &rI_tap P  &rI_tap MINUS
    &trans   &kp A   &kp S   &kp D   &kp F  &trans      &rI_tap H          &none  &rI_m RGUI K  &rI_r LALT L  &rI_p RCTRL SEMI    &rI_tap SQT
    &trans  &trans  &trans  &trans  &trans  &trans      &rI_tap N      &rI_tap M  &rI_tap COMMA   &rI_tap DOT      &rI_tap FSLH         &trans
-                    &trans  &trans  &trans        &mo LAYER_Symbol  &mo LAYER_Mouse  &mo LAYER_System
+                    &trans  &trans  &trans        &mo LAYER_Mouse  &mo LAYER_Symbol  &mo LAYER_System
             >;
         };
 
@@ -966,7 +966,7 @@
        &none    &kp RET      &kp SPACE      &kp TAB   &kp BSPC   &kp _CUT      &kp _CUT  &kp LS(TAB)  &kp _UNDO  &kp _REDO    &kp TAB      &none
    &sk LSHFT  &kp LCTRL       &kp LALT    &kp LGUI  &kp LSHFT  &kp _COPY     &kp _COPY     &kp LEFT     &kp UP   &kp DOWN  &kp RIGHT  &sk LSHFT
    &kp _C(L)  &select_all  &select_line  &select_word  &kp _FIND  &kp _PASTE   &kp _PASTE  &kp _HOME  &kp PG_UP  &kp PG_DN   &kp _END  &kp _C(L)
-                          &none  &none  &tog LAYER_Cursor        &select_word  &select_line  &extend_word
+                          &none  &tog LAYER_Cursor  &none        &select_word  &select_line  &extend_word
             >;
         };
 
@@ -980,7 +980,7 @@
        &none        &kp A         &kp B         &kp C         &kp D      &kp N0      &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)     &kp LS(N5)
    &sk LSHFT    &kp LCTRL      &kp LALT      &kp LGUI     &kp LSHFT       &kp X          &kp K  &kp N4  &kp N5  &kp N6     &kp MINUS  &kp LS(EQUAL)
        &kp E  &select_all  &select_line  &select_word     &kp _FIND       &kp F          &kp J  &kp N1  &kp N2  &kp N3      &kp FSLH     &kp LS(N8)
-                              &none  &tog LAYER_Number  &none            &kp EQUAL  &kp DOT  &kp N0
+                              &none  &none  &tog LAYER_Number        &kp EQUAL  &kp DOT  &kp N0
             >;
         };
 
@@ -1013,7 +1013,7 @@
     &kp LS(N1)     &kp LBKT  &kp LS(LBKT)   &kp LS(RBKT)     &kp RBKT  &kp LS(FSLH)     &kp DOT  &kp LS(N7)  &parang_right  &parang_left  &kp LS(N2)          &dot_dot
     &kp LS(N3)   &kp LS(N6)     &kp EQUAL  &kp LS(MINUS)   &kp LS(N4)    &kp LS(N8)   &kp COMMA   &kp RSHFT       &kp RGUI     &kp LALT   &kp RCTRL  &triple_backtick
  &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(BSLH)     &kp MINUS  &kp LS(DOT)     &kp FSLH    &kp SEMI  &kp LS(SQT)        &kp SQT    &kp GRAVE   &kp BSLH            &trans
-                            &kp BSLH  &kp LS(SEMI)  &kp LS(N5)          &tog LAYER_Symbol  &none  &none
+                            &kp BSLH  &kp LS(SEMI)  &kp LS(N5)        &kp LG(LS(N4))  &tog LAYER_Symbol  &none
             >;
         };
 
@@ -1023,7 +1023,7 @@
    &none                   &none  &msc SCRL_LEFT       &mmv MOVE_UP  &msc SCRL_RIGHT                   &none     &msc SCRL_LEFT            &mkp LCLK            &mkp MCLK            &mkp RCLK  &msc SCRL_RIGHT     &none
    &none    &msc SCRL_UP          &mmv MOVE_LEFT     &mmv MOVE_DOWN          &mmv MOVE_RIGHT    &msc SCRL_UP       &msc SCRL_UP  &mo LAYER_MouseFast  &mo LAYER_MouseWarp  &mo LAYER_MouseSlow                &kp K_APP  &mkp MB4
    &none  &msc SCRL_DOWN     &mo LAYER_MouseSlow  &mo LAYER_MouseWarp      &mo LAYER_MouseFast  &msc SCRL_DOWN   &msc SCRL_DOWN       &mmv MOVE_LEFT         &mmv MOVE_UP       &mmv MOVE_DOWN          &mmv MOVE_RIGHT  &mkp MB5
-                                  &mkp LCLK  &mkp RCLK  &mkp MB4                &none  &tog LAYER_Mouse  &kp _PASTE
+                                  &mkp LCLK  &mkp RCLK  &mkp MB4        &tog LAYER_Mouse  &none  &kp _PASTE
             >;
         };
 
@@ -1082,7 +1082,7 @@
    &none    &kp KP_N1     &kp KP_N2    &kp KP_N3     &kp KP_N4     &kp KP_N5        &kp KP_N6       &kp KP_N7     &kp KP_N8      &kp KP_N9        &kp KP_N0   &none
    &none    &sk LCTRL      &sk LALT     &sk LGUI     &sk LSHFT  &kp KP_MINUS     &kp KP_SLASH       &sk RSHFT      &sk RGUI       &sk LALT        &sk RCTRL   &none
    &none  &kp KP_LPAR  &kp KP_COMMA   &kp KP_DOT   &kp KP_RPAR   &kp KP_PLUS  &kp KP_MULTIPLY      &kp KP_NUM  &kp KP_CLEAR   &kp KP_EQUAL     &kp KP_ENTER   &none
-             &tog LAYER_Function  &tog LAYER_Number  &tog LAYER_Cursor        &tog LAYER_Symbol  &tog LAYER_Mouse  &tog LAYER_System
+             &tog LAYER_Function  &tog LAYER_Cursor  &tog LAYER_Number        &tog LAYER_Mouse  &tog LAYER_Symbol  &tog LAYER_System
             >;
         };
 
