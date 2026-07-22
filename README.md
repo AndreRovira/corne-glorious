@@ -31,8 +31,8 @@ what a Corne has — so all six thumb layers port 1:1:
 
 Magic is held from the outer pinky key below `=`.
 
-**21 of ZMK's 32 layers.** Bilateral home-row-mod enforcement is kept in full
-(8 layers). Dropped: the three alternate alpha layouts, Gaming (Glove80 keywell
+**21 of ZMK's 32 layers.** The 8 home-row-mod layers are kept in full, but the
+mods are relaxed to **non-bilateral** so same-hand shortcuts work (`Cmd+T`). Dropped: the three alternate alpha layouts, Gaming (Glove80 keywell
 geometry), Emoji/World (reachable only from the lost R6), Factory, and the macOS
 toggle layers — macOS is compiled in via `OPERATING_SYSTEM 'M'` instead.
 
@@ -51,8 +51,8 @@ Magic, and the right-hand same-hand mods**, so those are rehomed:
   placed than the Glove80 manages.
 - Hex `A`–`D` → Number layer's redundant Ret/Space/Tab/Bspc mirror block.
 - Magic → outer pinky, row 3.
-- Lower → `Z`+`X` / `.`+`/` combos. Not optional: with bilateral enforcement kept,
-  Lower's sticky mods are the only sanctioned way to type one-handed `Cmd`+`Q`.
+- Lower → `Z`+`X` / `.`+`/` combos, with sticky mods for one-handed shortcuts.
+  (With the HRMs now non-bilateral, same-hand `Cmd`+key also works directly.)
 
 Of sunaku's 22 combos, 6 survive — with three thumbs there are only three pairs
 per hand and all three are already used. The other 16 needed `T2`/`T3`/`T6`.

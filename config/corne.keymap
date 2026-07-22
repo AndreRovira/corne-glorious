@@ -39,7 +39,7 @@
   #define _WORD   LA
   #define _HOME   LG(LEFT)
   #define _END    LG(RIGHT)
-  #define _FILES  LS(LA(M))
+  #define _FILES  LG(LA(SPACE))
   #define _GLOBE  GLOBE
 #else
   #define _C      LC
@@ -67,6 +67,12 @@
 #define _FIND_NEXT  _C(G)
 #define _FIND_PREV  _C(LS(G))
 
+#if OPERATING_SYSTEM == 'M'
+  #define _SNAP   LG(LS(N5))  /* macOS screenshot toolbar (Cmd+Shift+5) */
+#else
+  #define _SNAP   PSCRN
+#endif
+
 /* keymap.zmk:4093 -- not a node; expands at the &-site into &kp _C(A) */
 #define select_all kp _C(A)
 
@@ -77,7 +83,7 @@
  * from the lost R6), Factory (Glove80-specific), and the macOS toggle layers
  * (macOS is baked into the base instead — see OPERATING_SYSTEM above).
  *
- * 21 of ZMK's 32 slots. Bilateral enforcement is kept in full.
+ * 21 of ZMK's 32 slots. Home-row mods relaxed to non-bilateral (see HRM triggers).
  */
 
 #define LAYER_QWERTY 0
@@ -102,24 +108,28 @@
 #define LAYER_Lower 19
 #define LAYER_Magic 20
 
-/* ── Bilateral HRM trigger positions ── */
+/* ── HRM trigger positions (non-bilateral) ── */
 
-/* Opposite-hand keys only -- this is what makes bilateral bilateral. Upstream
- * uses <RIGHT_HAND_KEYS> for left HRMs, which contains the RIGHT thumbs only
- * (keymap.zmk:2052-2062). Listing a hand's own thumbs here would let a same-hand
- * thumb trigger the hold, i.e. Ctrl+Esc.
+/* NON-BILATERAL (full relax): every key position triggers the hold, so home-row
+ * mods fire on the SAME hand too -- e.g. one-handed Cmd+T. This drops sunaku's
+ * bilateral typing protection by choice; the tap-preferred flavor + the
+ * require-prior-idle-ms guards below still gate a mod behind a deliberate ~0.2s
+ * hold after a brief pause, which is how you start a shortcut but not how you
+ * type mid-word. If fast same-hand typing misfires a mod (Shift on the index,
+ * require-prior-idle-ms=25, is likeliest), raise that idle guard. To restore
+ * bilateral, set LEFT back to the right-hand positions and RIGHT to the left.
  */
 #define LEFT_HRM_TRIGGERS \
-    6 7 8 9 10 11 \
-    18 19 20 21 22 23 \
-    30 31 32 33 34 35 \
-    39 40 41
+    0 1 2 3 4 5 6 7 8 9 10 11 \
+    12 13 14 15 16 17 18 19 20 21 22 23 \
+    24 25 26 27 28 29 30 31 32 33 34 35 \
+    36 37 38 39 40 41
 
 #define RIGHT_HRM_TRIGGERS \
-    0 1 2 3 4 5 \
-    12 13 14 15 16 17 \
-    24 25 26 27 28 29 \
-    36 37 38
+    0 1 2 3 4 5 6 7 8 9 10 11 \
+    12 13 14 15 16 17 18 19 20 21 22 23 \
+    24 25 26 27 28 29 30 31 32 33 34 35 \
+    36 37 38 39 40 41
 
 /* ── System behaviors ── */
 
@@ -991,8 +1001,8 @@
         layer_Function {
             display-name = "FUNC";
             bindings = <
-       &none       &kp RET    &kp C_PREV      &kp C_PP  &kp C_MUTE  &kp K_CALC     &kp K_CALC  &kp F7  &kp F8  &kp F9  &kp F10  &kp F13
-   &sk LSHFT     &kp LCTRL      &kp LALT      &kp LGUI  &kp LSHFT   &kp K_WWW      &kp K_WWW  &kp F4  &kp F5  &kp F6  &kp F11  &kp F14
+       &none       &kp RET    &kp C_PREV      &kp C_PP  &kp C_MUTE  &none     &none  &kp F7  &kp F8  &kp F9  &kp F10  &kp F13
+   &sk LSHFT     &kp LCTRL      &kp LALT      &kp LGUI  &kp LSHFT   &none      &none  &kp F4  &kp F5  &kp F6  &kp F11  &kp F14
        &none   &select_all  &select_line  &select_word  &kp _FIND  &kp _FILES     &kp _FILES  &kp F1  &kp F2  &kp F3  &kp F12  &kp F15
                         &tog LAYER_Function  &none  &none          &kp C_VOL_UP  &kp C_VOL_DN  &kp C_NEXT
             >;
@@ -1067,8 +1077,8 @@
             bindings = <
    &none   &none      &none      &none            &none  &none     &none      &none      &none     &none      &none  &kp _POWER
    &none   &none      &none      &none            &none  &none     &none  &kp RSHFT   &kp RGUI  &kp LALT  &kp RCTRL      &none
-   &none   &none  &kp K_APP  &kp PSCRN  &kp PAUSE_BREAK  &none     &none   &kp SLCK  &kp KP_NUM  &kp CAPS  &kp _LOCK  &kp _SLEEP
-                    &kp _LOCK  &kp KP_NUM  &kp SLCK       &kp PAUSE_BREAK  &kp PSCRN  &tog LAYER_System
+   &none   &none  &kp K_APP  &kp _SNAP  &kp C_BRI_UP  &none     &none   &kp C_BRI_DN  &kp KP_NUM  &kp CAPS  &kp _LOCK  &kp _SLEEP
+                    &kp _LOCK  &kp KP_NUM  &kp C_BRI_DN       &kp C_BRI_UP  &kp _SNAP  &tog LAYER_System
             >;
         };
 
@@ -1081,7 +1091,7 @@
             bindings = <
    &none    &kp KP_N1     &kp KP_N2    &kp KP_N3     &kp KP_N4     &kp KP_N5        &kp KP_N6       &kp KP_N7     &kp KP_N8      &kp KP_N9        &kp KP_N0   &none
    &none    &sk LCTRL      &sk LALT     &sk LGUI     &sk LSHFT  &kp KP_MINUS     &kp KP_SLASH       &sk RSHFT      &sk RGUI       &sk LALT        &sk RCTRL   &none
-   &none  &kp KP_LPAR  &kp KP_COMMA   &kp KP_DOT   &kp KP_RPAR   &kp KP_PLUS  &kp KP_MULTIPLY      &kp KP_NUM  &kp KP_CLEAR   &kp KP_EQUAL     &kp KP_ENTER   &none
+   &none  &kp LPAR  &kp COMMA   &kp KP_DOT   &kp RPAR   &kp KP_PLUS  &kp KP_MULTIPLY      &kp KP_NUM  &kp KP_CLEAR   &kp KP_EQUAL     &kp KP_ENTER   &none
              &tog LAYER_Function  &tog LAYER_Cursor  &tog LAYER_Number        &tog LAYER_Mouse  &tog LAYER_Symbol  &tog LAYER_System
             >;
         };
