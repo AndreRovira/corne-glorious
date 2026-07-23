@@ -7,14 +7,20 @@ sunaku's [Glorious Engrammer][ge] keymap (v52) ported to a **wireless 42-key Cor
 
 ## Layout
 
-![Base layer](img/keymap-base.svg)
+![Layer map](img/keymap.svg)
 
-All 21 layers are in **[`img/keymap.svg`](img/keymap.svg)**. Regenerate after any
-keymap change with [keymap-drawer](https://github.com/caksoylar/keymap-drawer):
+The eight functional layers, rendered with
+[keymap-drawer](https://github.com/caksoylar/keymap-drawer) and the styling in
+[`keymap_drawer.config.yaml`](keymap_drawer.config.yaml): macOS `⌘⇧⌥⌃` glyphs,
+softly-shaded hold/layer keys, faded pass-through keys. A framed view with a
+legend lives in [`docs/keymap-layers.html`](docs/keymap-layers.html).
+
+Regenerate after any keymap change:
 
 ```sh
-keymap parse -z config/corne.keymap -o keymap.yaml
-keymap draw keymap.yaml -o img/keymap.svg
+keymap -c keymap_drawer.config.yaml parse -z config/corne.keymap -o keymap.yaml
+keymap -c keymap_drawer.config.yaml draw keymap.yaml \
+  -s BASE CURS NUM FUNC SYM MOUS SYS MAGIC -o img/keymap.svg
 ```
 
 ## What this is
@@ -25,18 +31,22 @@ what a Corne has — so all six thumb layers port 1:1:
 
 | Thumb | Left | Right |
 | --- | --- | --- |
-| outer | `Bspc` → Cursor | `Space` → Symbol |
-| middle | `Del` → Number | `Tab` → Mouse |
-| inner | `Esc` → Function | `Enter` → System |
+| outer | `Esc` → Function | `Enter` → System |
+| middle | `Bksp` → Cursor | `Space` → Symbol |
+| inner | `Del` → Number | `Tab` → Mouse |
 
 Magic is held from the outer pinky key below `=`.
 
-**21 of ZMK's 32 layers.** The 8 home-row-mod layers are kept in full, but the
+**20 of ZMK's 32 layers.** The 8 home-row-mod layers are kept in full, but the
 mods are relaxed to **non-bilateral** so same-hand shortcuts work (`Cmd+T`). Dropped: the three alternate alpha layouts, Gaming (Glove80 keywell
 geometry), Emoji/World (reachable only from the lost R6), Factory, and the macOS
 toggle layers — macOS is compiled in via `OPERATING_SYSTEM 'M'` instead.
 
 ## Geometry
+
+> The *rehoming* rationale below is sunaku's original port; individual layer
+> **contents have since been personalized** — see the layer map above for what
+> each key actually does today.
 
 The Glove80 has **six** rows; a Corne has three. Rows R3/R4/R5 map 1:1 onto the
 alpha block. R1, R2 and R6 are lost. R2 costs nothing (the Number layer covers
@@ -51,8 +61,6 @@ Magic, and the right-hand same-hand mods**, so those are rehomed:
   placed than the Glove80 manages.
 - Hex `A`–`D` → Number layer's redundant Ret/Space/Tab/Bspc mirror block.
 - Magic → outer pinky, row 3.
-- Lower → `Z`+`X` / `.`+`/` combos, with sticky mods for one-handed shortcuts.
-  (With the HRMs now non-bilateral, same-hand `Cmd`+key also works directly.)
 
 Of sunaku's 22 combos, 6 survive — with three thumbs there are only three pairs
 per hand and all three are already used. The other 16 needed `T2`/`T3`/`T6`.

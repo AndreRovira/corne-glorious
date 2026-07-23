@@ -1,3 +1,50 @@
+<style>
+  :root{
+    --ground:#faf8f5; --ink:#2b2620; --muted:#877e73;
+    --accent:#d9821a; --border:#e8e2d9;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ground:#181512; --ink:#efe9e1; --muted:#a39a8e; --accent:#f0a53e; --border:#2d2925; }
+  }
+  :root[data-theme="dark"]{ --ground:#181512; --ink:#efe9e1; --muted:#a39a8e; --accent:#f0a53e; --border:#2d2925; }
+  :root[data-theme="light"]{ --ground:#faf8f5; --ink:#2b2620; --muted:#877e73; --accent:#d9821a; --border:#e8e2d9; }
+
+  html,body{ background:var(--ground); }
+  .page{ min-height:100dvh; background:var(--ground); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+    padding:clamp(20px,4vw,52px); display:flex; flex-direction:column; align-items:center; gap:22px; }
+  .mono{ font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  .head{ width:100%; max-width:940px; }
+  .eyebrow{ font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:12px;
+    letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin:0 0 8px; }
+  h1{ font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-weight:600;
+    font-size:clamp(24px,3.6vw,36px); letter-spacing:-.01em; margin:0; text-wrap:balance; }
+  .sub{ color:var(--muted); line-height:1.55; margin:10px 0 0; max-width:64ch; }
+  .sub b{ color:var(--ink); font-weight:600; }
+  .legend{ width:100%; max-width:940px; display:flex; flex-wrap:wrap; align-items:center;
+    gap:10px 24px; font-size:13px; color:var(--muted); }
+  .sw{ display:inline-flex; align-items:center; gap:8px; }
+  .chip{ width:16px; height:16px; border-radius:4px; border:1px solid rgba(0,0,0,.14); }
+  .keys b{ color:var(--ink); font-weight:600; }
+  .board{ width:100%; max-width:980px; background:#fff; border:1px solid var(--border);
+    border-radius:14px; padding:clamp(12px,2vw,22px); overflow-x:auto;
+    box-shadow:0 1px 3px rgba(40,30,15,.07); }
+  .board svg{ width:100%; height:auto; display:block; min-width:760px; }
+  footer{ color:var(--muted); font-size:12px; }
+  footer a{ color:var(--accent); text-decoration:none; }
+</style>
+<div class="page">
+  <div class="head">
+    <p class="eyebrow">ZMK · wireless corne · macos</p>
+    <h1>Glorious Corne — layer map</h1>
+    <p class="sub">The nine functional layers, one per row — the way sunaku lays them out. Softly shaded keys are the ones you <b>hold</b> to reach a layer (plus the home-row mods); faded keys pass through to the layer beneath.</p>
+  </div>
+  <div class="legend mono">
+    <span class="sw"><span class="chip" style="background:#eaf1fb"></span> hold / layer key</span>
+    <span class="sw"><span class="chip" style="background:#f5f5f5"></span> pass-through</span>
+    <span class="keys"><b>⌘</b> Cmd &nbsp;<b>⇧</b> Shift &nbsp;<b>⌥</b> Option &nbsp;<b>⌃</b> Control</span>
+  </div>
+  <div class="board">
 <svg width="900" height="2701" viewBox="0 0 900 2701" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <style>/* inherit to force styles through use tags */
 svg path {
@@ -1542,3 +1589,6 @@ rect.key.held { fill: #eaf1fb; }
 </g>
 </g>
 </svg>
+  </div>
+  <footer class="mono">rendered with keymap-drawer · <a href="https://github.com/AndreRovira/corne-glorious">AndreRovira/corne-glorious</a></footer>
+</div>
